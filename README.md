@@ -1,3 +1,5 @@
+# 拷贝 https://github.com/davezuko/react-redux-starter-kit
+感谢 davezuko 大神， 我再次基础上又添加了reduxsaga reselect
 # Deprecation Warning
 
 This project was started at the advent of the Redux ecosystem, and was intended to help users get up and running quickly. Since then, tooling and best practices have evolved tremendously. In order to get the most modern experience possible, I recommend checking out something like [create-react-app](https://github.com/facebookincubator/create-react-app) which is supported by many core React and Redux developers.
@@ -43,7 +45,7 @@ Finally, This project wouldn't be possible without the help of our many contribu
 After confirming that your environment meets the above [requirements](#requirements), you can create a new project based on `react-redux-starter-kit` by doing the following:
 
 ```bash
-$ git clone https://github.com/davezuko/react-redux-starter-kit.git <my-project-name>
+$ git clone https://github.com/goWrongWay/React-Redux-Saga-Reselect-Starter-Kit.git <my-project-name>
 $ cd <my-project-name>
 ```
 
@@ -65,7 +67,7 @@ While developing, you will probably rely mostly on `yarn start`; however, there 
 
 |`yarn <script>`    |Description|
 |-------------------|-----------|
-|`start`            |Serves your app at `localhost:3000`|
+|`start`            |Serves your app at `localhost:3013`|
 |`build`            |Builds the application to ./dist|
 |`test`             |Runs unit tests with Karma. See [testing](#testing)|
 |`test:watch`       |Runs `test` in watch mode to re-run tests when changed|
