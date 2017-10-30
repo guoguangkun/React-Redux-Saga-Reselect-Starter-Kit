@@ -5,6 +5,12 @@ const logger = require('../build/lib/logger')
 const webpackConfig = require('../build/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
+const historyApiFallback = require('connect-history-api-fallback');
+const browserSync = require('browser-sync')
+
+const webpackDevMiddleware = require('webpack-dev-middleware')
+
+const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const app = express()
 app.use(compress())
@@ -16,18 +22,61 @@ if (project.env === 'development') {
   const compiler = webpack(webpackConfig)
 
   logger.info('Enabling webpack development and HMR middleware')
-  app.use(require('webpack-dev-middleware')(compiler, {
-    publicPath  : webpackConfig.output.publicPath,
-    contentBase : path.resolve(project.basePath, project.srcDir),
-    hot         : true,
-    quiet       : false,
-    noInfo      : false,
-    lazy        : false,
-    stats       : 'normal',
-  }))
-  app.use(require('webpack-hot-middleware')(compiler, {
-    path: '/__webpack_hmr'
-  }))
+  browserSync({
+    port: 3013,
+    ui: {
+      port: 3014,
+    },
+    server: {
+      baseDir: 'src',
+
+      middleware: [
+        historyApiFallback(),
+
+        webpackDevMiddleware(compiler, {
+          // Dev middleware can't access config, so we provide publicPath
+          publicPath: webpackConfig.output.publicPath,
+
+          // These settings suppress noisy webpack output so only errors are displayed to the console.
+          noInfo: true,
+          quiet: false,
+          stats: {
+            assets: false,
+            colors: true,
+            version: false,
+            hash: false,
+            timings: false,
+            chunks: false,
+            chunkModules: false
+          },
+
+          // for other settings see
+          // https://webpack.js.org/guides/development/#using-webpack-dev-middleware
+        }),
+
+        // bundler should be the same as above
+        webpackHotMiddleware(compiler)
+      ]
+    },
+
+    // no need to watch '*.js' here, webpack will take care of it for us,
+    // including full page reloads if HMR won't work
+    files: [
+      'src/*.html'
+    ]
+  });
+  // app.use(require('webpack-dev-middleware')(compiler, {
+  //   publicPath  : webpackConfig.output.publicPath,
+  //   contentBase : path.resolve(project.basePath, project.srcDir),
+  //   hot         : true,
+  //   quiet       : false,
+  //   noInfo      : false,
+  //   lazy        : false,
+  //   stats       : 'normal',
+  // }))
+  // app.use(require('webpack-hot-middleware')(compiler, {
+  //   path: '/__webpack_hmr'
+  // }))
 
   // Serve static assets from ~/public since Webpack is unaware of
   // these files. This middleware doesn't need to be enabled outside

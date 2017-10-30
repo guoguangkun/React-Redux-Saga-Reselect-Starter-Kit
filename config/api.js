@@ -9,6 +9,7 @@ const base = 'http://api.bi.guazi-corp.com';
 // TODO 修改接口名称
 module.exports = {
     ipAddressApi: `http://apis.juhe.cn/ip/ip2addr`,
+    ipApi: `http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json`,
     test: `${base}/api/test`,
 
 };

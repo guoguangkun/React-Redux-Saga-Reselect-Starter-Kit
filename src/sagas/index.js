@@ -9,11 +9,15 @@ import * as HomeAction from '../reducers/home';
 import * as CounterAction from '../reducers/counter';
 
 var req = '';
+var apiAddress = '';
 export function fetchGetApi(params) {
+    if ((params.api === apiAddress) && req) {
+        req.abort();
+    }
     req = fetch.get(params.api, params.params)
         .timeout(60000)
         .withCredentials();
-    // apiAddress = params.api;
+    apiAddress = params.api;
     return req.then(response => {
         return response.body;
     }).then(json => {
@@ -22,14 +26,16 @@ export function fetchGetApi(params) {
 }
 
 export function fetchPostApi(params) {
-
+    if ((params.api === apiAddress) && req) {
+        req.abort();
+    }
     req = fetch.post(params.api)
         .timeout(60000)
         .withCredentials()
         .send(params.params)
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json');
-    // apiAddress = params.api;
+    apiAddress = params.api;
     return req.then(response => {
         return response.body;
     }).then(json => {
@@ -39,7 +45,8 @@ export function fetchPostApi(params) {
 
 const fetchConfig = {
     'INCREMENT_ASYNC': incrementAsync,
-    'searchIpAddress': fetchGetApi
+    'searchIpAddress': fetchGetApi,
+    'searchIp': fetchGetApi,
 };
 
 export function* fetchData(params) {
@@ -55,7 +62,8 @@ export function* fetchData(params) {
         return false;
     }
     switch (params.api) {
-        case API.ipAddressApi:
+        case API.ipApi:
+            console.log(data);
             yield put(HomeAction.setAddress(data));
             break;
         default:
@@ -69,8 +77,8 @@ export function* incrementAsync() {
 }
 
 export function* watchAsync() {
-    yield takeEvery('INCREMENT_ASYNC', incrementAsync)
-    yield takeLatest('searchIpAddress', fetchData)
+    yield takeEvery('INCREMENT_ASYNC', incrementAsync);
+    yield takeLatest('searchIp', fetchData)
 }
 
 export default function* rootSaga() {

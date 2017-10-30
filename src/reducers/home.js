@@ -12,7 +12,7 @@ const stringReducer = createReducer({
     [setHost]: (state, payload) => ({...state, host: payload}),
     [setAddress]: (state, payload) =>  {
         console.log(payload);
-        return Object.assign({}, state, {address: payload.result})
+        return Object.assign({}, state, {address: payload})
     },
 
 }, initialState);
