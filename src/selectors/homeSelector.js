@@ -1,7 +1,7 @@
 /**
  * Created by malin on 16/12/6.
  */
-import {createSelector} from 'reselect'
+import { createSelector } from 'reselect';
 
 export const homeSelector = createSelector(
     state => state.home.host,
@@ -9,7 +9,10 @@ export const homeSelector = createSelector(
     (host, address) => {
         return {
             host,
-            address
+            address,
         };
-    }
+    },
 );
+
+// export default homeSelector;
+

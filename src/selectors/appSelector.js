@@ -1,7 +1,7 @@
 /**
  * Created by malin on 16/12/6.
  */
-import {createSelector} from 'reselect'
+import { createSelector } from 'reselect';
 
 export const appSelector = createSelector(
     state => state.app.running,
@@ -18,8 +18,9 @@ export const appSelector = createSelector(
             fetchErrMessage,
             dataSource,
             columns,
-	        tableName,
+            tableName,
             modalVisible,
         };
-    }
+    },
 );
+// export default appSelector;

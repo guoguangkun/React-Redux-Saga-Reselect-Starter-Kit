@@ -1,4 +1,4 @@
-import {createAction, createReducer} from 'redux-act';
+import { createAction, createReducer } from 'redux-act';
 
 const initialState = {
     isFirstFetching: true,
@@ -35,17 +35,15 @@ export const changeDataShowType = createAction('change data showType');
 export const setModalVisible = createAction('set modal visible');
 
 const stringReducer = createReducer({
-    [getStatus]: (state, payload) => ({...state, running: !state.running}),
-    [firstFetching]: (state, payload) => ({...state, ...payload}),
-    [fetching]: (state, payload) => ({...state, ...payload}),
-    [fetchend]: (state, payload) => ({...state, ...payload}),
-    [fetchErr]: (state, payload) => ({...state, fetchErrMessage: payload, notification: true}),
-    [hideNotification]: (state, payload) => ({...state, notification: false, fetchErrMessage: ''}),
-    [setLeftAsideHeight]: (state, payload) => ({...state, leftSideHeight: payload}),
-    [changeDataShowType]: (state, payload) => ({...state, dataShowType: payload}),
-    [setModalVisible]: (state, payload) => ({...state, ...payload}),
+    [getStatus]: (state, payload) => ({ ...state, running: !state.running }),
+    [firstFetching]: (state, payload) => ({ ...state, ...payload }),
+    [fetching]: (state, payload) => ({ ...state, ...payload }),
+    [fetchend]: (state, payload) => ({ ...state, ...payload }),
+    [fetchErr]: (state, payload) => ({ ...state, fetchErrMessage: payload, notification: true }),
+    [hideNotification]: (state, payload) => ({ ...state, notification: false, fetchErrMessage: '' }),
+    [setLeftAsideHeight]: (state, payload) => ({ ...state, leftSideHeight: payload }),
+    [changeDataShowType]: (state, payload) => ({ ...state, dataShowType: payload }),
+    [setModalVisible]: (state, payload) => ({ ...state, ...payload }),
 
 }, initialState);
 export default stringReducer;
-
-

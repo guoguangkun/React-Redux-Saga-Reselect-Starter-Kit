@@ -1,7 +1,7 @@
 /**
  * Created by malin on 16/12/6.
  */
-import {createSelector} from 'reselect'
+import { createSelector } from 'reselect';
 
 export const counterSelector = createSelector(
     state => state.counter.counter,
@@ -9,7 +9,8 @@ export const counterSelector = createSelector(
     (counter, running) => {
         return {
             counter,
-            running
+            running,
         };
-    }
+    },
 );
+// export default counterSelector;
