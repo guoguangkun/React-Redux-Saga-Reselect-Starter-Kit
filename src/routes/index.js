@@ -12,8 +12,8 @@ export const createRoutes = () => ({
     component: CoreLayout,
     indexRoute: Home,
     childRoutes: [
-        CounterRoute,
-        NoFoundPageRoute,
+        CounterRoute(),
+        NoFoundPageRoute(),
     ],
 });
 

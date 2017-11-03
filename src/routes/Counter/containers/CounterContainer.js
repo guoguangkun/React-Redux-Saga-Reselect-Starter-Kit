@@ -35,7 +35,8 @@ CounterContainer.propTypes = {
     counter: PropTypes.number.isRequired,
     increment: PropTypes.func.isRequired,
     running: PropTypes.bool.isRequired,
-    dispatch: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+
 };
 
 const mapDispatchToProps = dispatch => ({
